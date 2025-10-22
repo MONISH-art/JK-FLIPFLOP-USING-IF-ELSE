@@ -43,8 +43,25 @@ step-6 Run the program.
 
 **PROGRAM**
 <img width="745" height="236" alt="image" src="https://github.com/user-attachments/assets/358da1f0-651a-4641-83f8-8de876a50aa5" />
-
-/* Program for flipflops and verify its truth table in quartus using Verilog programming. Developed by: RegisterNumber:
+// JK Flip-Flop (with async reset)
+module jk_ff (
+    input  wire clk, rst, J, K,
+    output reg  Q
+);
+    always @(posedge clk or posedge rst) begin
+        if (rst)
+            Q <= 1'b0;        // Reset
+        else begin
+            case ({J,K})
+                2'b00: Q <= Q;        // Hold
+                2'b01: Q <= 1'b0;     // Reset
+                2'b10: Q <= 1'b1;     // Set
+                2'b11: Q <= ~Q;       // Toggle
+            endcase
+        end
+    end
+endmodule
+/* Program for flipflops and verify its truth table in quartus using Verilog programming. Developed by:monish.s RegisterNumber:25018307
 */
 
 **RTL LOGIC FOR FLIPFLOPS**
